@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FATTStore - Top Up Games</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    /* CSS untuk animasi zoom in/out */
+    .game-item {
+      transition: transform 0.3s ease;
+    }
+
+    .game-item:hover {
+      transform: scale(1.05);
+    }
+
+    .chat-cs {
+      font-size: 14px;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .chat-cs:hover {
+      transform: scale(1.05);
+    }
+
+    .chat-cs svg {
+      fill: white;
+    }
+
+    .slide-in {
+      opacity: 0;
+      transform: translateX(-50px);
+      animation: slideIn 0.5s forwards;
+    }
+
+    .payment-method:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .payment-method:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .category-button:active {
+      transform: scale(0.95);
+      background-color: #2563eb;
+      /* Warna biru yang lebih gelap */
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans leading-normal">
+
+  <a href="https://wa.me/yourphonenumber"
+    class="chat-cs fixed bottom-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2 hover:bg-white-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+      <path
+        d="M20.5 3.5c-1.8-1.8-4.3-2.9-6.9-2.9s-5.1 1.1-6.9 2.9c-3.6 3.6-3.6 9.4 0 12.9v4.5l4.4-1.4c1.2.4 2.5.6 3.9.6 2.6 0 5.1-1.1 6.9-2.9 3.6-3.6 3.6-9.4 0-12.9zm-7.6 16.3c-1.2 0-2.4-.2-3.5-.7l-3.1 1 1-3.1c-1-1.5-1.6-3.3-1.6-5.1 0-4.9 4-8.9 8.9-8.9s8.9 4 8.9 8.9-4 8.9-8.9 8.9zm4.4-6.9c-.1-.1-.7-.3-.9-.3-.2 0-.4 0-.5.1-.2.1-.4.3-.5.5-.1.1-.3.4-.4.5-.1.2-.2.2-.4.1-.4-.2-.8-.5-1.2-.8-.3-.2-.7-.7-1.1-1.3-.4-.7-.6-1.2-.7-1.3-.1-.2 0-.3.1-.4.1-.1.2-.3.4-.5.1-.1.1-.2.2-.4.1-.2 0-.3 0-.4 0-.1-.4-1-1-1.1-.6-.1-1.1-.1-1.5 0-.4.1-1.1.3-1.7.9-.7.7-1 1.6-1 2.2s.5 1.5 1.1 2.3c.6.8 1.3 1.4 1.5 1.6.2.2 2.5 3.5 5.8 4.5 2.1.7 2.9.6 3.4.5.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.3-.4-.3z" />
+    </svg>
+    <span>CHAT CS</span>
+  </a>
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <!-- Logo -->
+      <a href="#" class="text-2xl font-bold">FATTStore</a>
+
+      <!-- Navbar Links -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="#" class="hover:text-gray-200">Beranda</a>
+        <a href="#" class="hover:text-gray-200">Cek Transaksi</a>
+        <a href="#" class="hover:text-gray-200">Leaderboard</a>
+        <a href="#" class="hover:text-gray-200">Kalkulator</a>
+      </nav>
+
+      <!-- Search and Sign In -->
+      <div class="flex items-center space-x-4">
+        <!-- Search Form -->
+        <form action="#" method="GET" class="relative hidden md:block">
+          <input type="text" name="search" placeholder="Cari game..."
+            class="px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-white">
+          <button type="submit"
+            class="absolute right-2 top-2/4 transform -translate-y-2/4 text-gray-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m-3.65 2.35A7.5 7.5 0 1 1 14.12 9.88 7.5 7.5 0 0 1 13 17.5z" />
+            </svg>
+          </button>
+        </form>
+
+        <!-- Sign In Button -->
+        <a href="#"
+          class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white hidden md:block">Sign
+          In</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden flex items-center text-white" id="mobile-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <nav class="flex flex-col space-y-2 mt-4 px-4">
+        <a href="#" class="hover:text-gray-200">Beranda</a>
+        <a href="#" class="hover:text-gray-200">Cek Transaksi</a>
+        <a href="#" class="hover:text-gray-200">Leaderboard</a>
+        <a href="#" class="hover:text-gray-200">Kalkulator</a>
+        <a href="#"
+          class="bg-white text-blue-600 px-4 py-2 rounded-lg font-bold hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white">Sign
+          In</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container mx-auto mt-10 px-4">
+    <div class="bg-blue-600 rounded-lg p-6 md:p-10 text-white text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">KAMI HADIR</h2>
+      <h1 class="text-4xl md:text-5xl font-bold mb-8">TOP UP GAMES</h1>
+      <p class="mb-6 text-lg">Untuk kalian yang berani tampil keren dihadapan teman saat bermain game kesayangan kalian
+      </p>
+      <p class="mb-4">Rekomendasi web top up termurah, cepat, dan legal 100%</p>
+      <p>Proses kilat cuma 1 menit, hanya di:</p>
+      <a href="#"
+        class="bg-white text-blue-600 px-6 py-3 rounded-lg mt-4 font-bold hover:bg-gray-100 inline-block">www.fattsstore.com</a>
+    </div>
+
+    <!-- Tombol Kategori -->
+    <div class="flex flex-wrap justify-center mt-8 space-x-2 md:space-x-4">
+      <button id="voucher-button"
+        class="category-button bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+        <a href="kategori.html">Voucher</a>
+      </button>
+      <button id="pulsa-button"
+        class="category-button bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Pulsa Data
+      </button>
+      <button id="tagihan-button"
+        class="category-button bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Tagihan
+      </button>
+    </div>
+
+    <!-- Game Items -->
+    <div class="flex flex-wrap justify-center mt-10 gap-6">
+      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <div class="bg-white rounded-lg shadow-md p-4 md:p-6 game-item">
+          <img src="image/ff.jpg" alt="Game 1" class="w-full rounded-lg mb-4">
+          <h3 class="text-xl font-bold mb-2">Game 1</h3>
+          <p class="text-gray-600 mb-4">Description for Game 1.</p>
+          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 inline-block">Top
+            Up Sekarang</a>
+        </div>
+      </div>
+      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <div class="bg-white rounded-lg shadow-md p-4 md:p-6 game-item">
+          <img src="image/download (4).jpg" alt="Game 2" class="w-full rounded-lg mb-4">
+          <h3 class="text-xl font-bold mb-2">Game 2</h3>
+          <p class="text-gray-600 mb-4">Description for Game 2.</p>
+          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 inline-block">Top
+            Up Sekarang</a>
+        </div>
+      </div>
+      <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+        <div class="bg-white rounded-lg shadow-md p-4 md:p-6 game-item">
+          <img src="image/download (5).jpg" alt="Game 3" class="w-full rounded-lg mb-4">
+          <h3 class="text-xl font-bold mb-2">Game 3</h3>
+          <p class="text-gray-600 mb-4">Description for Game 3.</p>
+          <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 inline-block">Top
+            Up Sekarang</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Section Kontak -->
+    <section class="container mx-auto mt-10 px-4">
+      <h2 class="text-3xl font-bold mb-6 text-center">Hubungi Kami</h2>
+      <form action="#" method="POST" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="name" class="block text-gray-700 font-bold">Nama</label>
+            <input type="text" name="name" id="name"
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+          <div>
+            <label for="email" class="block text-gray-700 font-bold">Email</label>
+            <input type="email" name="email" id="email"
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+        </div>
+        <div>
+          <label for="message" class="block text-gray-700 font-bold">Pesan</label>
+          <textarea name="message" id="message" rows="4"
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700">Kirim
+            Pesan</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Informasi 24 Jam -->
+    <div class="bg-white rounded-lg shadow-md p-4 md:p-6 mt-10 text-center">
+      <h2 class="text-xl md:text-2xl font-bold mb-4">Toko Kami Buka 24 Jam</h2>
+      <p class="text-gray-700 mb-4">Kami selalu siap melayani Anda kapan saja. Kunjungi kami untuk top up game dengan
+        cepat dan mudah.</p>
+
+      <!-- Metode Pembayaran dengan Animasi -->
+      <div class="flex justify-center space-x-6 mt-4 overflow-hidden">
+        <div class="payment-method slide-in">
+          <img src="images/bank_transfer.png" alt="Bank Transfer" class="h-12 w-12">
+          <p class="text-gray-600 mt-2">Bank Transfer</p>
+        </div>
+        <div class="payment-method slide-in">
+          <img src="images/credit_card.png" alt="Credit Card" class="h-12 w-12">
+          <p class="text-gray-600 mt-2">Kartu Kredit</p>
+        </div>
+        <div class="payment-method slide-in">
+          <img src="images/e_wallet.png" alt="E-Wallet" class="h-12 w-12">
+          <p class="text-gray-600 mt-2">E-Wallet</p>
+        </div>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div class="flex justify-center space-x-6 mt-4">
+        <a href="https://facebook.com/yourstore" class="text-blue-600 hover:text-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M9 8h-3v4h3v12h5v-12h4s.4-2.5.7-4h-4v-1.9c0-.6.3-1.1 1.3-1.1h2.7v-4.5c-.5 0-2.5-.2-4.5-.2-4.5 0-7.5 2.8-7.5 7.9v3.8z" />
+          </svg>
+        </a>
+        <a href="https://instagram.com/yourstore" class="text-blue-600 hover:text-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 0c3.2 0 3.6 0 4.9.1 1.2.1 2.1.3 2.8.6.8.3 1.4.8 2 1.4.6.6 1.1 1.2 1.4 2 .3.7.5 1.6.6 2.8.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2.1-.6 2.8-.3.8-.8 1.4-1.4 2-.6.6-1.2 1.1-2 1.4-.7.3-1.6.5-2.8.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2.1-.3-2.8-.6-.8-.3-1.4-.8-2-1.4-.6-.6-1.1-1.2-1.4-2-.3-.7-.5-1.6-.6-2.8-.1-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-2.1.6-2.8.3-.8.8-1.4 1.4-2 .6-.6 1.2-1.1 2-1.4.7-.3 1.6-.5 2.8-.6 1.3-.1 1.7-.1 4.9-.1zm0-1c-3.2 0-3.6 0-4.9.1-1.3.1-2.3.3-3.1.7-.9.3-1.7.8-2.4 1.5-.7.7-1.2 1.5-1.5 2.4-.4.8-.6 1.8-.7 3.1-.1 1.3-.1 1.7-.1 4.9s0 3.6.1 4.9c.1 1.3.3 2.3.7 3.1.3.9.8 1.7 1.5 2.4.7.7 1.5 1.2 2.4 1.5.8.4 1.8.6 3.1.7 1.3.1 1.7.1 4.9.1s3.6 0 4.9-.1c1.3-.1 2.3-.3 3.1-.7.9-.3 1.7-.8 2.4-1.5.7-.7 1.2-1.5 1.5-2.4.4-.8.6-1.8.7-3.1.1-1.3.1-1.7.1-4.9s0-3.6-.1-4.9c-.1-1.3-.3-2.3-.7-3.1-.3-.9-.8-1.7-1.5-2.4-.7-.7-1.5-1.2-2.4-1.5-.8-.4-1.8-.6-3.1-.7-1.3-.1-1.7-.1-4.9-.1zm0 5.8c-3.4 0-6.2 2.8-6.2 6.2s2.8 6.2 6.2 6.2 6.2-2.8 6.2-6.2-2.8-6.2-6.2-6.2zm0 10.5c-2.3 0-4.2-1.9-4.2-4.2s1.9-4.2 4.2-4.2 4.2 1.9 4.2 4.2-1.9 4.2-4.2 4.2zm7.5-10.9c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5 1.5.7 1.5 1.5-.6 1.5-1.5 1.5z" />
+          </svg>
+        </a>
+        <a href="https://twitter.com/yourstore" class="text-blue-600 hover:text-blue-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M24 4.6c-.9.4-1.8.6-2.8.8.9-.5 1.7-1.4 2-2.4-.9.5-1.8.9-2.8 1.1-.9-.9-2.2-1.4-3.6-1.4-2.7 0-4.8 2.2-4.8 4.8 0 .4.1.9.2 1.3-4-.2-7.6-2.1-10-4.9-.4.6-.5 1.4-.5 2.2 0 1.6.8 3 2.1 3.9-.7 0-1.5-.2-2.1-.6 0 0 0 .1 0 .1 0 2.3 1.6 4.2 3.8 4.6-.4.1-.8.1-1.2.1-.3 0-.6 0-.9-.1.6 1.8 2.3 3.1 4.3 3.2-1.6 1.2-3.6 1.9-5.8 1.9h-.7c2 1.3 4.5 2 7 2 8.3 0 12.8-6.9 12.8-12.8v-.6c.9-.6 1.7-1.5 2.4-2.3z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4 mt-10">
+      <div class="container mx-auto px-4 text-center">
+        <p>&copy; 2024 FATTStore. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Script untuk Toggle Mobile Menu -->
+    <script>
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.category-button').forEach(button => {
+        button.addEventListener('click', () => {
+          button.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            button.style.transform = 'scale(1)';
+          }, 150);
+        });
+      });
+    </script>
+</body>
+
+</html>
