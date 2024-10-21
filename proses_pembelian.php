@@ -1,6 +1,6 @@
 <?php
 // Koneksi ke database
-$conn = new mysqli("localhost", "username_db", "password_db", "nama_db");
+$conn = new mysqli("localhost", "root", "", "transaksi"); // password dikosongkan
 
 // Cek koneksi
 if ($conn->connect_error) {
@@ -20,7 +20,11 @@ $sql = "INSERT INTO pembelian (user_id, server, jumlah_diamond, metode_pembayara
         VALUES ('$user_id', '$server', '$jumlah_diamond', '$metode_pembayaran', '$no_whatsapp', '$kode_promo')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "Pembelian berhasil!";
+    // Tampilkan pop-up sukses
+    echo "<script>
+            alert('Pembelian berhasil!');
+            window.location.href='halaman_setelah_beli.php'; // Ganti dengan halaman yang sesuai
+          </script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
