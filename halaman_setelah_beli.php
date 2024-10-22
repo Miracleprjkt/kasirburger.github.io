@@ -37,7 +37,7 @@
         // Fungsi untuk menutup pop-up
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
-            window.location.href = 'mautopup.html'; // Ganti dengan halaman yang sesuai
+            window.location.href = 'index.html'; // Ganti dengan halaman yang sesuai
         }
     </script>
 </body>
